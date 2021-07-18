@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import {Route, Link} from 'react-router-dom';
+import {Route, Link, Switch} from 'react-router-dom';
 import Events from '../Events/Events';
+import EventDetails from '../../components/EventDetails/EventDetails';
 class Main extends Component {
     render() {
         return (
             <div>
                 <Link to="/events">Events</Link>
-                <Route path="/events" component={Events}/>
+                <i className="fa fa-twitter"></i>
+                <Switch>
+                    <Route path="/events" exact component={Events}/>
+                    <Route path="/events/:eventName" component={EventDetails}/>
+                </Switch>
+
             </div>
                         
         );

@@ -92,7 +92,7 @@
     font-weight: 700;
     color: #fff;
   }
-  .container .card .fa-arrow-right {
+  .container .card div.right>i {
     z-index: 100;
     position: absolute;
     right: 75px;
