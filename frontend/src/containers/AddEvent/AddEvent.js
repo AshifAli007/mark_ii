@@ -18,6 +18,9 @@ class AddEvent extends React.Component {
     }
     submit = (e) =>{
         e.preventDefault();
+        axios.post(url,{
+            
+        });
         console.log(this.state.eventDetails);
     }
     render(){
