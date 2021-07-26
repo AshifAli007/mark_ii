@@ -21,7 +21,7 @@ class Events extends Component {
             return <Event 
             key={event._id} 
             event = {event.name} 
-            content = {event.brief} 
+            content = {event.description} 
             timeToLive = {100}   
             />
         });

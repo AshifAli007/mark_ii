@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const addEvent = (eventDetails)=>{
     return new Promise(async (resolve, reject)=>{
         try{
-            console.log("hello function");
+            console.log(eventDetails);
             await models.event.insertMany(eventDetails);
             return resolve(eventDetails + "Added Successfully");
         }
