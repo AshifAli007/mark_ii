@@ -15,7 +15,16 @@ const getEvents = (req, res, next)=>{
     })
 }
 
+const deleteEvents = (req,res, next)=>{
+    let id = req.params.id;
+    eventService.deleteEvents(id).then(data=>{
+        res.status(200).json({"success":true,"data":data});
+    }).catch(err=>{
+        return res.status(err.code).json({"success":false,"message":err.message});
+    })
+}
 module.exports = {
     addEvent,
     getEvents,
+    deleteEvents,
 }

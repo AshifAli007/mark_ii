@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const addEvent = (eventDetails)=>{
     return new Promise(async (resolve, reject)=>{
         try{
-            console.log(eventDetails);
             await models.event.insertMany(eventDetails);
             return resolve(eventDetails + "Added Successfully");
         }
@@ -30,8 +29,22 @@ const getEvents = ()=>{
     })
 }
 
+const deleteEvents = (_id)=>{
+    return new Promise(async (resolve, reject)=>{
+        try{
+            console.log('inside delete events');
+            let event = await model.event.deleteOne(
+                {_id},
+            )
+            resolve(event+"Deleted Successfully");
+        }catch(err){
+            reject(err);
+        }
+    })
+};
 
 module.exports ={
     addEvent,
     getEvents,
+    deleteEvents,
 }

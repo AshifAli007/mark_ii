@@ -10,19 +10,39 @@ class Events extends Component {
     componentDidMount(){
         axios.get('http://localhost:8000/v1/eventService/getEvents')
                 .then(res=>{
-                    console.log(res.data.data);
                     const events = res.data.data;
                     this.setState({events: events});
 
                 });
     }
+    timeToLive = (endTime) =>{
+        let today = new Date();
+
+        let diffInMilliSecs = Date.parse(endTime) - today.getTime();
+
+        let days = Math.floor(diffInMilliSecs/(1000*60*60*24));
+        let hours = Math.floor((diffInMilliSecs/(1000*60*60))%24);
+        let minutes = Math.floor((diffInMilliSecs/(1000*60))%60);
+        let seconds = Math.floor((diffInMilliSecs/(1000))%60);
+        
+        let timeToLive = {
+            days: days,
+            hours: hours,
+            minutes: minutes,
+            seconds:seconds
+        }
+        return timeToLive;
+    }
     render() {
+
         const post = this.state.events.map(event=>{
+
+
             return <Event 
             key={event._id} 
             event = {event.name} 
             content = {event.description} 
-            timeToLive = {100}   
+            timeToLive = {this.timeToLive(event.endTime)}
             />
         });
         return (

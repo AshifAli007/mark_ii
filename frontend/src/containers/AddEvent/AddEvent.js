@@ -5,8 +5,7 @@ class AddEvent extends React.Component {
         eventDetails:{
             name: '',
             description:'',
-            endDate:'',
-            endTime:'',
+            endTime:'2021-07-30T15:30',
             
         }
     }
@@ -22,9 +21,7 @@ class AddEvent extends React.Component {
         axios.post(url,{
             eventDetails:[{
                 ...this.state.eventDetails,
-                startDateAndTime: Date.now()
-            }],
-            params:{hello:"dfdf"}
+            }]
             
         }).then(res=>{
             console.log(res,Date.now());
@@ -39,8 +36,7 @@ class AddEvent extends React.Component {
             <form onSubmit={(e)=>this.submit(e)}>
                 <input type="text" onChange={(e)=>this.handle(e)} id='name' value={this.state.eventDetails.name} placeholder="Event name" name="hello"/>
                 <input type="text" onChange={(e)=>this.handle(e)} id='description' value={this.state.eventDetails.description} placeholder="Description"/>
-                <input type="date" onChange={(e)=>this.handle(e)} id='endDate' value={this.state.eventDetails.endDate} placeholder="" min="2021-07-25" max="2021-08-25"/>
-                <input type="time" onChange={(e)=>this.handle(e)} id='endTime' value={this.state.eventDetails.endTime}/>
+                <input type="datetime-local" onChange={(e)=>this.handle(e)} id='endTime' value={this.state.eventDetails.endTime} placeholder="End Time"/>
                 <button type="submit">Submit</button>
             </form>
             <h1>This is the add event form</h1>

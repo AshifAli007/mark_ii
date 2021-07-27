@@ -6,11 +6,7 @@ import cx from 'classnames';
 import CountDownTimer from '../../components/CountDownTimer/CountDownTimer';
 function Event(props){
     let event = camelCase(props.event);
-    let hoursMinSecs = {
-        hours: props.hour,
-        min: props.min,
-        sec: props.sec
-    }
+    let hoursMinSecs = props.timeToLive;
     return(
             
             <div className={"col " + cx(styles.container, styles.event)}>
