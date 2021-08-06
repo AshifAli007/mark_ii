@@ -14,17 +14,23 @@ const getEvents = (req, res, next)=>{
         res.status(200).json({"success":true,"data":data});
     })
 }
-
+const getEvent = (req, res, next)=>{
+    let id = req.params.id;
+    eventService.getEvent(id).then(data=>{
+        res.status(200).json({"success":true,"data":data});
+    })
+}
 const deleteEvents = (req,res, next)=>{
     let id = req.params.id;
     eventService.deleteEvents(id).then(data=>{
         res.status(200).json({"success":true,"data":data});
     }).catch(err=>{
-        return res.status(err.code).json({"success":false,"message":err.message});
+        return res.json({"success":false,"message":err.message});
     })
 }
 module.exports = {
     addEvent,
     getEvents,
+    getEvent,
     deleteEvents,
 }

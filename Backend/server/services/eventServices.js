@@ -19,7 +19,7 @@ const getEvents = ()=>{
     return new Promise(async (resolve, reject)=>{
         try{
             console.log("get event functions");
-            let events = models.event.find();
+            let events = await models.event.find();
             resolve(events);
         }catch(err){
             console.log(err);
@@ -28,12 +28,24 @@ const getEvents = ()=>{
         
     })
 }
+const getEvent = (_id)=>{
+    return new Promise(async (resolve, reject)=>{
+        try{
+            let event = await models.event.findOne(
+                {_id},
+            )
+            resolve(event);
+        }catch(err){
+            console.log(err);
+            reject({ code:401, message: err.message})
+        }
+    })
 
+}
 const deleteEvents = (_id)=>{
     return new Promise(async (resolve, reject)=>{
         try{
-            console.log('inside delete events');
-            let event = await model.event.deleteOne(
+            let event = await models.event.deleteOne(
                 {_id},
             )
             resolve(event+"Deleted Successfully");
@@ -46,5 +58,6 @@ const deleteEvents = (_id)=>{
 module.exports ={
     addEvent,
     getEvents,
+    getEvent,
     deleteEvents,
 }

@@ -12,7 +12,7 @@ class Main extends Component {
                 <i className="fa fa-twitter"></i>
                 <Switch>
                     <Route path="/events" exact component={Events}/>
-                    <Route path="/events/:eventName" component={EventDetails}/>
+                    <Route path="/event/:id" component={EventDetails}/>
                     <Route path="/addEvent" component={AddEvent}/>
                 </Switch>
 

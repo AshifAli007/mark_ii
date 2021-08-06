@@ -5,7 +5,6 @@ import axios from 'axios';
 class Events extends Component {
     state ={
         events: [],
-        selectedEvent: null,
     }
     componentDidMount(){
         axios.get('http://localhost:8000/v1/eventService/getEvents')
@@ -37,9 +36,9 @@ class Events extends Component {
 
         const post = this.state.events.map(event=>{
 
-
             return <Event 
             key={event._id} 
+            id={event._id}
             event = {event.name} 
             content = {event.description} 
             timeToLive = {this.timeToLive(event.endTime)}

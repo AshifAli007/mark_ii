@@ -1,11 +1,10 @@
 import React from 'react';
 import styles from './Event.module.css';
 import {Link} from 'react-router-dom';
-import camelCase from 'camelcase';
 import cx from 'classnames';
 import CountDownTimer from '../../components/CountDownTimer/CountDownTimer';
 function Event(props){
-    let event = camelCase(props.event);
+    let id = props.id;
     let hoursMinSecs = props.timeToLive;
     return(
             
@@ -15,7 +14,7 @@ function Event(props){
                     <CountDownTimer hoursMinSecs={hoursMinSecs}/>
                     {/* <p>{props.content}</p> */}
                 
-                        <Link to={"/events/"+event} >
+                        <Link to={"/event/"+id} >
                         <div className={cx(styles.right)}>
                             <i className="fa fa-arrow-right" ></i>
                             </div>
@@ -54,7 +53,7 @@ function Event(props){
                     <i className="fa fa-instagram"></i>
                     <i className="fa fa-github"></i>
                     </div>
-                    <Link to="/events/techWars">
+                    <Link to={"/event/"+id}>
                         <button>
                         </button>
                     </Link>
