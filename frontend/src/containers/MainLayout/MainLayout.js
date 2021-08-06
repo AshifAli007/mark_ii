@@ -8,7 +8,7 @@ class Main extends Component {
         return (
             <div>
                 <Link to="/events">Events</Link>
-                <Link to="/addEvent">Add Event</Link>
+                <Link to="/addEvent">Add Events1</Link>
                 <i className="fa fa-twitter"></i>
                 <Switch>
                     <Route path="/events" exact component={Events}/>
