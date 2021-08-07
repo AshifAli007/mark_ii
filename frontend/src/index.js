@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 
