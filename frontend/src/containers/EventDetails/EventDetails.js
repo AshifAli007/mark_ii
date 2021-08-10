@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import styles from './EventDetails.module.css';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import  { Redirect } from 'react-router-dom'
 class EventDetails extends Component {
     state = {
         event: null,
-        eventName: null
-
+        eventName: null,
+        isEventDeleted: false,
     }
     componentDidMount(){
-        axios.get('http://localhost:8000/v1/eventService/getEvent/'+this.props.match.params.id)
+        axios.get('http://localhost:8000/v1/eventService/getEvent/'+this.props.match.params.id,{
+            headers:{
+                'Authorization' : `Bearer ${this.props.token}`,
+            }
+        })
             .then(res=>{
                 const event = res.data.data;
                 this.setState({event: event});
@@ -21,12 +26,14 @@ class EventDetails extends Component {
         console.log('event Deleted');
         axios.delete('http://localhost:8000/v1/eventService/deleteEvent/'+this.state.event._id)
             .then(data=>{
-                props.history.push('/events');        
+                this.setState({isEventDeleted: !this.state.isEventDeleted});
             });
         
     }
+
     render() {
         let heading = (<div></div>);
+        
         console.log(this.props.match.params.id);
         if(this.state.event){
             console.log(this.state.event)
@@ -43,8 +50,9 @@ class EventDetails extends Component {
         
         return(
             <div className={styles.EventDetails}>
-    
+                {this.state.isEventDeleted ? <Redirect to="/events"/> : null}
                 {heading}
+                
                 <div className={styles.card}>
                 <div className={styles.thumbnail}><img className={styles.left} src="https://cdn2.hubspot.net/hubfs/322787/Mychefcom/images/BLOG/Header-Blog/photo-culinaire-pexels.jpg"/></div>
                 <div className={styles.right}>
@@ -75,4 +83,10 @@ class EventDetails extends Component {
 
 }
 
-export default EventDetails;
+const mapStateToProps = (state) =>{
+    return{
+        token: state.auth.token,
+    }
+}
+
+export default connect(mapStateToProps)(EventDetails);

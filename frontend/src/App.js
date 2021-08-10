@@ -1,13 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, withRouter} from 'react-router-dom';
 import Main from './containers/MainLayout/MainLayout'
-function App() {
-  return (
-    <BrowserRouter>
-          <Main></Main>
-    </BrowserRouter>
-  );
+import { connect } from 'react-redux';
+import * as actions from './store/actions/index';
+import {React, Component} from 'react';
+
+class App extends Component {
+  componentDidMount() {
+    this.props.onTryAutoSignIn();
+  }
+  render() {
+    return (
+      <BrowserRouter>
+            <Main></Main>
+      </BrowserRouter>
+    );
+  }
+
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    onTryAutoSignIn: () => dispatch(actions.authCheckState()),  
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(App));
