@@ -38,8 +38,14 @@ const login = (userDetails) =>{
             logger.info(user);
             if(await bcryptjs.compare(userDetails.password, user.password)){
                 const accessToken = generateToken(user);
+                logger.debug(accessToken);
                 const refreshToken = jwt.sign(user.toJSON(), process.env.REFRESH_TOKEN_SECRET);
-                return resolve({accessToken: accessToken, refreshToken: refreshToken});
+                return resolve({
+                                accessToken: accessToken,
+                                refreshToken: refreshToken, 
+                                userId: user,
+                                expireIn: 3600,
+                        });
 
             }else{
                 reject({code: 404, message: 'password does not match'});

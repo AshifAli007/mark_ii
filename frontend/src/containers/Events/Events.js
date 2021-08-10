@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import Event from '../../components/Event/Event';
 import styles from  './Events.module.css';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 class Events extends Component {
     state ={
         events: [],
     }
     componentDidMount(){
-        axios.get('http://localhost:8000/v1/eventService/getEvents')
+        axios.get('http://localhost:8000/v1/eventService/getEvents',{
+            headers: {
+                'Authorization': `Bearer ${this.props.token}`,
+            }
+        })
                 .then(res=>{
                     const events = res.data.data;
                     this.setState({events: events});
@@ -42,6 +48,7 @@ class Events extends Component {
             event = {event.name} 
             content = {event.description} 
             timeToLive = {this.timeToLive(event.endTime)}
+            isAuthenticated = {this.props.isAuthenticated}
             />
         });
         return (
@@ -51,4 +58,11 @@ class Events extends Component {
         );
     }
 }
-export default Events;
+const mapStateToProps = (state) =>{
+    return{
+        token: state.auth.token,
+        isAuthenticated: state.auth.token !== null,
+    }
+}
+
+export default connect(mapStateToProps)(Events);

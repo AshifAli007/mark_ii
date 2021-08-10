@@ -14,7 +14,7 @@ function Event(props){
                     <CountDownTimer hoursMinSecs={hoursMinSecs}/>
                     {/* <p>{props.content}</p> */}
                 
-                        <Link to={"/event/"+id} >
+                        <Link to={props.isAuthenticated ? "/event/"+id : "/authentication"}>
                         <div className={cx(styles.right)}>
                             <i className="fa fa-arrow-right" ></i>
                             </div>
@@ -53,7 +53,7 @@ function Event(props){
                     <i className="fa fa-instagram"></i>
                     <i className="fa fa-github"></i>
                     </div>
-                    <Link to={"/event/"+id}>
+                    <Link to={props.isAuthenticated ? "/event/"+id : "/authentication"}> 
                         <button>
                         </button>
                     </Link>
