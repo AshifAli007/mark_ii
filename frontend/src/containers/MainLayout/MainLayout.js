@@ -30,7 +30,7 @@ class Main extends Component {
         return (
             <div>
                 <Link to="/events">Events</Link>
-                {this.props.isAuthenticated ? <Link to="/addEvent">Add Event</Link> : null}
+                {this.props.isAuthenticated ? <Link to="/addEvent">Add Even</Link> : null}
                 { this.props.isAuthenticated 
                     ?<Link to="/logout">Logout</Link>
                     : <Link to="/authentication">Login</Link> }
